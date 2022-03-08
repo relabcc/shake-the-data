@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/shake-the-data/static/css/main.035cdd3c.css",
+    "main.js": "/shake-the-data/static/js/main.b17104f9.js",
+    "static/js/581.1e0b2ff3.chunk.js": "/shake-the-data/static/js/581.1e0b2ff3.chunk.js",
+    "static/js/787.436def5c.chunk.js": "/shake-the-data/static/js/787.436def5c.chunk.js",
+    "index.html": "/shake-the-data/index.html",
+    "main.035cdd3c.css.map": "/shake-the-data/static/css/main.035cdd3c.css.map",
+    "main.b17104f9.js.map": "/shake-the-data/static/js/main.b17104f9.js.map",
+    "787.436def5c.chunk.js.map": "/shake-the-data/static/js/787.436def5c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.035cdd3c.css",
+    "static/js/main.b17104f9.js"
+  ]
+}
