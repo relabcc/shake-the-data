@@ -1,0 +1,102 @@
+[
+    {
+        "City": "Kuala Lumpur",
+        "Country": "Malaysia",
+        "% Days": "0.8296"
+    },
+    {
+        "City": "Fortaleza",
+        "Country": "Brazil",
+        "% Days": "0.8288"
+    },
+    {
+        "City": "Abidjan",
+        "Country": "Ivory Coast",
+        "% Days": "0.7488"
+    },
+    {
+        "City": "Guayaquil",
+        "Country": "Ecuador",
+        "% Days": "0.7471"
+    },
+    {
+        "City": "Recife",
+        "Country": "Brazil",
+        "% Days": "0.7373"
+    },
+    {
+        "City": "Lagos",
+        "Country": "Nigeria",
+        "% Days": "0.7252"
+    },
+    {
+        "City": "Port Harcourt",
+        "Country": "Nigeria",
+        "% Days": "0.7003"
+    },
+    {
+        "City": "Kumasi",
+        "Country": "Ghana",
+        "% Days": "0.6879"
+    },
+    {
+        "City": "Ibadan",
+        "Country": "Nigeria",
+        "% Days": "0.6816"
+    },
+    {
+        "City": "London",
+        "Country": "United Kingdom",
+        "% Days": "0.6693"
+    },
+    {
+        "City": "Paris",
+        "Country": "France",
+        "% Days": "0.6540"
+    },
+    {
+        "City": "Jakarta",
+        "Country": "Indonesia",
+        "% Days": "0.6389"
+    },
+    {
+        "City": "Addis Ababa",
+        "Country": "Ethiopia",
+        "% Days": "0.6364"
+    },
+    {
+        "City": "Douala",
+        "Country": "Cameroon",
+        "% Days": "0.6181"
+    },
+    {
+        "City": "Barcelona",
+        "Country": "Spain",
+        "% Days": "0.6099"
+    },
+    {
+        "City": "Kochi",
+        "Country": "India",
+        "% Days": "0.5973"
+    },
+    {
+        "City": "Beijing",
+        "Country": "People's Republic of China",
+        "% Days": "0.5841"
+    },
+    {
+        "City": "Nairobi",
+        "Country": "Kenya",
+        "% Days": "0.5836"
+    },
+    {
+        "City": "Singapore",
+        "Country": "Singapore",
+        "% Days": "0.5770"
+    },
+    {
+        "City": "Dalian",
+        "Country": "People's Republic of China",
+        "% Days": "0.5710"
+    }
+]

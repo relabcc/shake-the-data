@@ -2,10 +2,16 @@
   "name": "shake-the-data",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/shake-the-data",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.3",
     "@testing-library/user-event": "^13.5.0",
+    "d3-array": "^3.1.1",
+    "d3-scale": "^4.0.2",
+    "lodash": "^4.17.21",
+    "matter-js": "^0.18.0",
+    "pathseg": "^1.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",
@@ -15,7 +21,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "deploy": "gh-pages -d build -r https://github.com/relabcc/shake-the-data.git"
   },
   "eslintConfig": {
     "extends": [
@@ -34,5 +41,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^3.2.3"
   }
 }
