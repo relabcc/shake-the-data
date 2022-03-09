@@ -1,16 +1,16 @@
 {
   "files": {
     "main.css": "/shake-the-data/static/css/main.d3ae6475.css",
-    "main.js": "/shake-the-data/static/js/main.e46d1074.js",
+    "main.js": "/shake-the-data/static/js/main.740c2fbf.js",
     "static/js/581.1e0b2ff3.chunk.js": "/shake-the-data/static/js/581.1e0b2ff3.chunk.js",
     "static/js/787.436def5c.chunk.js": "/shake-the-data/static/js/787.436def5c.chunk.js",
     "index.html": "/shake-the-data/index.html",
     "main.d3ae6475.css.map": "/shake-the-data/static/css/main.d3ae6475.css.map",
-    "main.e46d1074.js.map": "/shake-the-data/static/js/main.e46d1074.js.map",
+    "main.740c2fbf.js.map": "/shake-the-data/static/js/main.740c2fbf.js.map",
     "787.436def5c.chunk.js.map": "/shake-the-data/static/js/787.436def5c.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.d3ae6475.css",
-    "static/js/main.e46d1074.js"
+    "static/js/main.740c2fbf.js"
   ]
 }
