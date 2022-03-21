@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/shake-the-data/static/css/main.d3ae6475.css",
-    "main.js": "/shake-the-data/static/js/main.62a2b8e8.js",
+    "main.css": "/shake-the-data/static/css/main.985bc4dc.css",
+    "main.js": "/shake-the-data/static/js/main.8c578abd.js",
     "static/js/581.c8815243.chunk.js": "/shake-the-data/static/js/581.c8815243.chunk.js",
     "static/js/787.436def5c.chunk.js": "/shake-the-data/static/js/787.436def5c.chunk.js",
     "index.html": "/shake-the-data/index.html",
-    "main.d3ae6475.css.map": "/shake-the-data/static/css/main.d3ae6475.css.map",
-    "main.62a2b8e8.js.map": "/shake-the-data/static/js/main.62a2b8e8.js.map",
+    "main.985bc4dc.css.map": "/shake-the-data/static/css/main.985bc4dc.css.map",
+    "main.8c578abd.js.map": "/shake-the-data/static/js/main.8c578abd.js.map",
     "787.436def5c.chunk.js.map": "/shake-the-data/static/js/787.436def5c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.d3ae6475.css",
-    "static/js/main.62a2b8e8.js"
+    "static/css/main.985bc4dc.css",
+    "static/js/main.8c578abd.js"
   ]
 }
