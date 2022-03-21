@@ -1,3 +1,7 @@
+body {
+    background-color: #fafafa;
+}
+
 .App {
     width: 100%;
     height: 100%;
@@ -5,7 +9,7 @@
 }
 
 .label-box {
-    background-color:  white;
+    background-color:  #fafafa;
     padding: 1em;
     font-weight: bold;
 }
@@ -14,4 +18,14 @@
     margin: 0;
     font-size: 1.25rem;
     white-space: pre-wrap;
+}
+
+.notice {
+    text-align: center;
+    padding: 6em 2em;
+    font-size: 1.25em;
+}
+
+.notice button {
+    font-size: 1.5rem;
 }
