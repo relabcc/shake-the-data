@@ -5,6 +5,7 @@ import { scaleSqrt } from 'd3-scale'
 import { min, max } from 'd3-array';
 import random from 'lodash/random'
 import round from 'lodash/round'
+import DataLabel from './DataLabel';
 
 var loadSvg = function (url) {
   return fetch(url)
@@ -36,10 +37,8 @@ const getResizedUrl = async (src, ratio = 1) => new Promise((res) => {
   img.src = src
 })
 
-const veryLightGray = '#fafafa'
-const veryDarkGray = '#141414'
-
-function DataShaker() {
+function DataShaker({ dataName, sprite }) {
+  const [boundBox, setBoundBox] = useState({})
   const [activeCity, setCity] = useState(null);
   const [modalPos, setModalPos] = useState({});
 
@@ -47,7 +46,9 @@ function DataShaker() {
   const eventFiretime = useRef()
   useEffect(() => {
     ref.current.innerHTML = null
-    const { width, height } = ref.current.getBoundingClientRect()
+    const bb = ref.current.getBoundingClientRect()
+    setBoundBox(bb)
+    const { width, height } = bb
     var Engine = Matter.Engine,
       Render = Matter.Render,
       Runner = Matter.Runner,
@@ -73,7 +74,7 @@ function DataShaker() {
         height,
         // showAngleIndicator: true,
         wireframes: false,
-        background: veryLightGray,
+        background: 'transparent',
       }
     });
 
@@ -83,31 +84,33 @@ function DataShaker() {
     var runner = Runner.create();
     Runner.run(runner, engine);
 
-    const barWidth = 50
-    const bodyRender = { fillStyle: veryLightGray }
+    const barWidth = 1
+    const bodyRender = { fillStyle: 'black' }
     Composite.add(world, [
       Bodies.rectangle(width / 2, 0, width, barWidth, { isStatic: true , render: bodyRender }),
       Bodies.rectangle(width / 2, height, width, barWidth, { isStatic: true , render: bodyRender }),
       Bodies.rectangle(width, height / 2, barWidth, height, { isStatic: true , render: bodyRender }),
       Bodies.rectangle(0, height / 2, barWidth, height, { isStatic: true, render: bodyRender })
     ]);
-    const spriteSize = 480
+    const spriteSize = 380
     const vmin = Math.min(width, height)
     const maxSize = vmin / spriteSize / 3
-    loadSvg(`${process.env.PUBLIC_URL}/Umbrella.svg`).then(async (root) => {
-      const data = await import('./data/precip.json')
+    Promise.all([
+      loadSvg(`${process.env.PUBLIC_URL}/sprites/${sprite}`),
+      loadSvg(`${process.env.PUBLIC_URL}/sprites/silo/${sprite}`),
+    ]).then(async ([root, silo]) => {
+      const data = await import(`./data/${dataName}`)
       const rainData = data.default.map(d => [d.City, +d['% Days'], d.Country])
       const getValue = d => d[1]
       const scale = scaleSqrt()
         .domain([min(rainData, getValue), max(rainData, getValue)])
         .range([maxSize * 0.5, maxSize])
-      const vertexSets = select(root, 'path').map(function (path) {
+      const vertexSets = select(silo, 'path').map(function (path) {
         return Svg.pathToVertices(path)
       })
       const svgEle = root.querySelector('svg')
       await Promise.all(rainData.map(async city => {
         const s = scale(getValue(city))
-        root.querySelector('path')?.setAttribute('fill', veryDarkGray)
         const texture = await getResizedUrl(`data:image/svg+xml,${encodeURIComponent(svgEle?.outerHTML)}`, s)
         const box = Bodies.fromVertices(width / 2, Math.random() * height / 2, vertexSets, {
           angle: random(-Math.PI, Math.PI),
@@ -117,7 +120,7 @@ function DataShaker() {
             }
           }
         }, true)
-        box.label = `${city[0]}, ${city[2]}\n(${round(city[1] * 100, 2)}%)`
+        box.label = `${round(city[1] * 100, 2)}%\n${city[0]}, ${city[2]}`
         Body.scale(box, s, s)
         Composite.add(world, box)
 
@@ -166,7 +169,7 @@ function DataShaker() {
     Composite.add(world, mouseConstraint);
 
     Events.on(mouseConstraint, "enddrag", (e) => {
-      if (getDist(e.mouse.mousedownPosition, e.mouse.mouseupPosition) < 10) {
+      if (getDist(e.mouse.mousedownPosition, e.mouse.mouseupPosition) < 10 && !e.body.isStatic) {
         eventFiretime.current = Date.now()
         setCity(e.body.label)
         setModalPos(e.mouse.position)
@@ -179,25 +182,15 @@ function DataShaker() {
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
-  }, [])
+  }, [dataName, sprite])
 
   return (
-    <>
-      <div className="App" ref={ref} />
+    <div className="shaker-wrapper">
+      <div className="shaker" ref={ref} />
       {activeCity && (
-        <div
-          style={{
-            position: 'absolute',
-            left: modalPos.x,
-            top: modalPos.y,
-            transform: 'translate(-50%, -50%)',
-          }}
-          className="label-box"
-        >
-          <p>{activeCity}</p>
-        </div>
+        <DataLabel {...modalPos}>{activeCity}</DataLabel>
       )}
-    </>
+    </div>
   )
 }
 
