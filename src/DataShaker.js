@@ -37,8 +37,8 @@ const getResizedUrl = async (src, ratio = 1) => new Promise((res) => {
   img.src = src
 })
 
-function DataShaker({ dataName, sprite }) {
-  const [boundBox, setBoundBox] = useState({})
+function DataShaker({ dataName, sprite, code }) {
+  // const [boundBox, setBoundBox] = useState({})
   const [activeCity, setCity] = useState(null);
   const [modalPos, setModalPos] = useState({});
 
@@ -47,7 +47,7 @@ function DataShaker({ dataName, sprite }) {
   useEffect(() => {
     ref.current.innerHTML = null
     const bb = ref.current.getBoundingClientRect()
-    setBoundBox(bb)
+    // setBoundBox(bb)
     const { width, height } = bb
     var Engine = Matter.Engine,
       Render = Matter.Render,
@@ -134,7 +134,7 @@ function DataShaker({ dataName, sprite }) {
       var updateGravity = function (event) {
         var orientation = typeof window.orientation !== 'undefined' ? window.orientation : 0,
           gravity = engine.gravity;
-        var factor = 20
+        var factor = 10
 
         if (orientation === 0) {
           gravity.x = Common.clamp(event.gamma, -90, 90) / factor;
@@ -186,6 +186,9 @@ function DataShaker({ dataName, sprite }) {
 
   return (
     <div className="shaker-wrapper">
+       <div className="proj-code">
+          <h2>#{code}</h2>
+        </div>
       <div className="shaker" ref={ref} />
       {activeCity && (
         <DataLabel {...modalPos}>{activeCity}</DataLabel>

@@ -25,17 +25,17 @@ function App() {
   return mounted && (
     isPermitted ? (
       <div className="wrapper">
-        <div className="flex align-start justify-space-between">
+        <header className="flex align-start justify-space-between">
           <h1 className="title">Rainy Days</h1>
           <img alt="No more..." src={logo} className="logo" />
-        </div>
-        <div className="flex-grow">
-          <DataShaker dataName="precip.json" sprite="umbrella.svg" />
-        </div>
-        <div className="flex justify-space-between subtitle flex-wrap">
-          <p>全世界最常下雨的城市</p>
-          <p>World Cities That Have The Most Rainy Days</p>
-        </div>
+        </header>
+        <main className="flex-grow">
+          <DataShaker dataName="precip.json" sprite="umbrella.svg" code="001" />
+        </main>
+        <footer className="flex justify-space-between subtitle flex-wrap">
+          <p className="cht">全世界最常下雨的城市</p>
+          <p className="eng">World Cities That Have The Most Rainy Days</p>
+        </footer>
       </div>
     ) : (
       <div className="notice">
