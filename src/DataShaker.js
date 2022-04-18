@@ -84,8 +84,8 @@ function DataShaker({ dataName, sprite, code }) {
     var runner = Runner.create();
     Runner.run(runner, engine);
 
-    const barWidth = 1
-    const bodyRender = { fillStyle: 'black' }
+    const barWidth = 20
+    const bodyRender = { fillStyle: 'transparent' }
     Composite.add(world, [
       Bodies.rectangle(width / 2, 0, width, barWidth, { isStatic: true , render: bodyRender }),
       Bodies.rectangle(width / 2, height, width, barWidth, { isStatic: true , render: bodyRender }),
