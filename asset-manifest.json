@@ -1,18 +1,18 @@
 {
   "files": {
-    "main.css": "/shake-the-data/static/css/main.49a80b1d.css",
-    "main.js": "/shake-the-data/static/js/main.c703364f.js",
+    "main.css": "/shake-the-data/static/css/main.6089931f.css",
+    "main.js": "/shake-the-data/static/js/main.b8ecc76e.js",
     "static/js/581.c8815243.chunk.js": "/shake-the-data/static/js/581.c8815243.chunk.js",
     "static/js/787.436def5c.chunk.js": "/shake-the-data/static/js/787.436def5c.chunk.js",
     "index.html": "/shake-the-data/index.html",
     "static/media/logo.svg": "/shake-the-data/static/media/logo.bd2c28d27a690efc6ccd10201695e113.svg",
     "static/media/gird.svg": "/shake-the-data/static/media/gird.71ab15b74a59a3e81f3d.svg",
-    "main.49a80b1d.css.map": "/shake-the-data/static/css/main.49a80b1d.css.map",
-    "main.c703364f.js.map": "/shake-the-data/static/js/main.c703364f.js.map",
+    "main.6089931f.css.map": "/shake-the-data/static/css/main.6089931f.css.map",
+    "main.b8ecc76e.js.map": "/shake-the-data/static/js/main.b8ecc76e.js.map",
     "787.436def5c.chunk.js.map": "/shake-the-data/static/js/787.436def5c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.49a80b1d.css",
-    "static/js/main.c703364f.js"
+    "static/css/main.6089931f.css",
+    "static/js/main.b8ecc76e.js"
   ]
 }
