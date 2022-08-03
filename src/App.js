@@ -5,6 +5,7 @@ import DataShaker from './DataShaker';
 import logo from './logo.svg'
 
 function App() {
+  const [theMode, setTheMode] = useState(1);
   const [mounted, setIsmounted] = useState(null)
   const [isPermitted, setIsPermitted] = useState()
   useEffect(() => {
@@ -24,13 +25,19 @@ function App() {
   }
   return mounted && (
     isPermitted ? (
-      <div className="wrapper">
+      <div className={`wrapper is-${theMode ? 'dark' : 'light'}`}>
         <header className="flex align-start justify-space-between">
           <h1 className="title">Rainy Days</h1>
           <img alt="No more..." src={logo} className="logo" />
         </header>
         <main className="flex-grow">
-          <DataShaker dataName="precip.json" sprite="umbrella.svg" code="001" />
+          <DataShaker
+            dataName="precip.json"
+            sprite="umbrella.svg"
+            code="001"
+            theMode={theMode}
+            setTheMode={setTheMode}
+          />
         </main>
         <footer className="flex justify-space-between subtitle flex-wrap">
           <p className="cht">全世界最常下雨的城市</p>

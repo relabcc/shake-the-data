@@ -1,54 +1,61 @@
-import * as Matter from 'matter-js';
-import { useEffect, useRef, useState } from 'react';
-import 'pathseg'
-import { scaleSqrt } from 'd3-scale'
-import { min, max } from 'd3-array';
-import random from 'lodash/random'
-import round from 'lodash/round'
-import DataLabel from './DataLabel';
+import * as Matter from "matter-js";
+import { useEffect, useRef, useState } from "react";
+import "pathseg";
+import { scaleSqrt } from "d3-scale";
+import { min, max } from "d3-array";
+import random from "lodash/random";
+import round from "lodash/round";
+import DataLabel from "./DataLabel";
 
 var loadSvg = function (url) {
   return fetch(url)
     .then((response) => response.text())
-    .then(raw => (new window.DOMParser()).parseFromString(raw, 'image/svg+xml'))
+    .then((raw) =>
+      new window.DOMParser().parseFromString(raw, "image/svg+xml")
+    );
 };
 
 var select = function (root, selector) {
   return Array.prototype.slice.call(root.querySelectorAll(selector));
 };
 
-const getDist = (a, b) => Math.sqrt(Math.abs((b.x - a.x) * (b.y - a.y)))
+const getDist = (a, b) => Math.sqrt(Math.abs((b.x - a.x) * (b.y - a.y)));
 
 // const colors = ['#f19648', '#f5d259', '#f55a3c', '#063e7b', '#ececd1']
 
-const getResizedUrl = async (src, ratio = 1) => new Promise((res) => {
-  const canvas = document.createElement("canvas");
-  const ctx = canvas.getContext("2d");
-  const img = new Image();
-  img.onload = () => {
-    const { width, height } = img
-    canvas.width = width * ratio
-    canvas.height = height * ratio
-    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-    canvas.toBlob(blob => {
-      return res(URL.createObjectURL(blob))
-    })
-  }
-  img.src = src
-})
+const getResizedUrl = async (src, ratio = 1) =>
+  new Promise((res) => {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+    const img = new Image();
+    img.onload = () => {
+      const { width, height } = img;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+      canvas.toBlob((blob) => {
+        return res(URL.createObjectURL(blob));
+      });
+    };
+    img.src = src;
+  });
 
-function DataShaker({ dataName, sprite, code }) {
+function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
   // const [boundBox, setBoundBox] = useState({})
   const [activeCity, setCity] = useState(null);
   const [modalPos, setModalPos] = useState({});
 
-  const ref = useRef()
-  const eventFiretime = useRef()
+  const ref = useRef();
+  const eventFiretime = useRef();
   useEffect(() => {
-    ref.current.innerHTML = null
-    const bb = ref.current.getBoundingClientRect()
+    const bodyPositions = {};
+    let dataCount;
+    ref.current.innerHTML = null;
+    const bb = ref.current.getBoundingClientRect();
     // setBoundBox(bb)
-    const { width, height } = bb
+    const { width, height } = bb;
+    const spriteSize = 380;
+
     var Engine = Matter.Engine,
       Render = Matter.Render,
       Runner = Matter.Runner,
@@ -74,8 +81,8 @@ function DataShaker({ dataName, sprite, code }) {
         height,
         // showAngleIndicator: true,
         wireframes: false,
-        background: 'transparent',
-      }
+        background: "transparent",
+      },
     });
 
     Render.run(render);
@@ -84,57 +91,102 @@ function DataShaker({ dataName, sprite, code }) {
     var runner = Runner.create();
     Runner.run(runner, engine);
 
-    const barWidth = 20
-    const bodyRender = { fillStyle: 'transparent' }
+    const barWidth = 20;
+    const bodyRender = { fillStyle: "transparent" };
     Composite.add(world, [
-      Bodies.rectangle(width / 2, 0, width, barWidth, { isStatic: true , render: bodyRender }),
-      Bodies.rectangle(width / 2, height, width, barWidth, { isStatic: true , render: bodyRender }),
-      Bodies.rectangle(width, height / 2, barWidth, height, { isStatic: true , render: bodyRender }),
-      Bodies.rectangle(0, height / 2, barWidth, height, { isStatic: true, render: bodyRender })
+      Bodies.rectangle(width / 2, 0, width, barWidth, {
+        isStatic: true,
+        render: bodyRender,
+      }),
+      Bodies.rectangle(width / 2, height, width, barWidth, {
+        isStatic: true,
+        render: bodyRender,
+      }),
+      Bodies.rectangle(width, height / 2, barWidth, height, {
+        isStatic: true,
+        render: bodyRender,
+      }),
+      Bodies.rectangle(0, height / 2, barWidth, height, {
+        isStatic: true,
+        render: bodyRender,
+      }),
     ]);
-    const spriteSize = 380
-    const vmin = Math.min(width, height)
-    const maxSize = vmin / spriteSize / 3
+    const vmin = Math.min(width, height);
+    const maxSize = vmin / spriteSize / 3;
     Promise.all([
       loadSvg(`${process.env.PUBLIC_URL}/sprites/${sprite}`),
       loadSvg(`${process.env.PUBLIC_URL}/sprites/silo/${sprite}`),
     ]).then(async ([root, silo]) => {
-      const data = await import(`./data/${dataName}`)
-      const rainData = data.default.map(d => [d.City, +d['% Days'], d.Country])
-      const getValue = d => d[1]
+      const data = await import(`./data/${dataName}`);
+      const rainData = data.default.map((d) => [
+        d.City,
+        +d["% Days"],
+        d.Country,
+      ]);
+      dataCount = rainData.length;
+      const getValue = (d) => d[1];
       const scale = scaleSqrt()
         .domain([min(rainData, getValue), max(rainData, getValue)])
-        .range([maxSize * 0.5, maxSize])
-      const vertexSets = select(silo, 'path').map(function (path) {
-        return Svg.pathToVertices(path)
-      })
-      const svgEle = root.querySelector('svg')
-      await Promise.all(rainData.map(async city => {
-        const s = scale(getValue(city))
-        const texture = await getResizedUrl(`data:image/svg+xml,${encodeURIComponent(svgEle?.outerHTML)}`, s)
-        const box = Bodies.fromVertices(width / 2, Math.random() * height / 2, vertexSets, {
-          angle: random(-Math.PI, Math.PI),
-          render: {
-            sprite: {
-              texture,
-            }
-          }
-        }, true)
-        box.label = `${round(city[1] * 100, 2)}%\n${city[0]}, ${city[2]}`
-        Body.scale(box, s, s)
-        Composite.add(world, box)
+        .range([maxSize * 0.5, maxSize]);
+      const vertexSets = select(silo, "path").map(function (path) {
+        return Svg.pathToVertices(path);
+      });
+      const svgEle = root.querySelector("svg");
+      const dataPoints = await Promise.all(
+        rainData.map(async (city) => {
+          const s = scale(getValue(city));
+          const texture = await getResizedUrl(
+            `data:image/svg+xml,${encodeURIComponent(svgEle?.outerHTML)}`,
+            s
+          );
+          const box = Bodies.fromVertices(
+            width / 2,
+            (Math.random() * height) / 2,
+            vertexSets,
+            {
+              angle: random(-Math.PI, Math.PI),
+              render: {
+                sprite: {
+                  texture,
+                },
+              },
+            },
+            true
+          );
+          box.label = `${round(city[1] * 100, 2)}%\n${city[0]}, ${city[2]}`;
+          Body.scale(box, s, s);
+          Composite.add(world, box);
 
-        return box.id
-      }))
+          return box;
+        })
+      );
 
+      const checkAll = () => {
+        if (
+          dataPoints.every(
+            ({ position: { x, y } }) =>
+              x < -spriteSize ||
+              y < -spriteSize ||
+              x > width + spriteSize ||
+              y > height + spriteSize
+          )
+        ) {
+          Events.off(engine, "afterUpdate", checkAll);
+          setTimeout(() => {
+            setTheMode((m) => 1 - m);
+          }, 500)
+        }
+      }
+      Events.on(engine, "afterUpdate", checkAll);
     });
 
     // add gyro control
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       var updateGravity = function (event) {
-        var orientation = typeof window.orientation !== 'undefined' ? window.orientation : 0,
+        var orientation =
+            typeof window.orientation !== "undefined" ? window.orientation : 0,
           gravity = engine.gravity;
-        var factor = 10
+        var factor = 10;
 
         if (orientation === 0) {
           gravity.x = Common.clamp(event.gamma, -90, 90) / factor;
@@ -151,7 +203,7 @@ function DataShaker({ dataName, sprite, code }) {
         }
       };
 
-      window.addEventListener('deviceorientation', updateGravity);
+      window.addEventListener("deviceorientation", updateGravity);
     }
 
     // add mouse control
@@ -161,40 +213,41 @@ function DataShaker({ dataName, sprite, code }) {
         constraint: {
           stiffness: 0.2,
           render: {
-            visible: false
-          }
-        }
+            visible: false,
+          },
+        },
       });
 
     Composite.add(world, mouseConstraint);
 
     Events.on(mouseConstraint, "enddrag", (e) => {
-      if (getDist(e.mouse.mousedownPosition, e.mouse.mouseupPosition) < 10 && !e.body.isStatic) {
-        eventFiretime.current = Date.now()
-        setCity(e.body.label)
-        setModalPos(e.mouse.position)
+      if (
+        getDist(e.mouse.mousedownPosition, e.mouse.mouseupPosition) < 10 &&
+        !e.body.isStatic
+      ) {
+        eventFiretime.current = Date.now();
+        setCity(e.body.label);
+        setModalPos(e.mouse.position);
       }
-    })
+    });
 
     Events.on(mouseConstraint, "mouseup", (e) => {
-      if (Date.now() - eventFiretime.current > 500) setCity(null)
-    })
+      if (Date.now() - eventFiretime.current > 500) setCity(null);
+    });
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
-  }, [dataName, sprite])
+  }, [dataName, sprite, theMode]);
 
   return (
     <div className="shaker-wrapper">
-       <div className="proj-code">
-          <h2>#{code}</h2>
-        </div>
+      <div className="proj-code">
+        <h2>#{code}</h2>
+      </div>
       <div className="shaker" ref={ref} />
-      {activeCity && (
-        <DataLabel {...modalPos}>{activeCity}</DataLabel>
-      )}
+      {activeCity && <DataLabel {...modalPos}>{activeCity}</DataLabel>}
     </div>
-  )
+  );
 }
 
 export default DataShaker;

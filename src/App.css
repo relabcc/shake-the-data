@@ -1,6 +1,5 @@
 body {
-    background-color: black;
-    color: white;
+    
     font-family: Arial, Helvetica, 'Noto Sans TC', sans-serif;
 }
 
@@ -9,6 +8,16 @@ body {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    user-select: none;
+}
+
+.wrapper.is-dark {
+    color: white;
+    background-color: black;
+}
+.wrapper.is-light {
+    color: black;
+    background-color: white;
 }
 
 header {
@@ -64,9 +73,17 @@ footer .eng {
     font-size: 15vmin;
     line-height: 1em;
     font-weight: 900;
-    color: black;
     -webkit-text-stroke-width: 1px;
+}
+
+.is-dark .proj-code {
+    color: black;
     -webkit-text-stroke-color: white;
+}
+
+.is-light .proj-code {
+    color: white;
+    -webkit-text-stroke-color: black;
 }
 
 .title {
@@ -96,7 +113,15 @@ footer .eng {
     height: 100%;
     position: relative;
     overflow: hidden;
-    border: 2px solid white;
+    border: 2px solid ;
+}
+
+.is-dark .shaker {
+    border-color: white;
+}
+
+.is-light .shaker {
+    border-color: black;
 }
 
 .subtitle p {
@@ -105,9 +130,19 @@ footer .eng {
 }
 
 .label-box {
-    background-color:  black;
     padding: 1em;
-    border: 1px solid white;
+    border: 1px solid;
+}
+
+.is-dark .label-box {
+    background-color:  black;
+    border-color: white;
+
+}
+
+.is-light .label-box {
+    background-color:  white;
+    border-color: black;
 }
 
 .label-box p {
