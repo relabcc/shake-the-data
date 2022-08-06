@@ -7,17 +7,15 @@ import random from "lodash/random";
 import round from "lodash/round";
 import DataLabel from "./DataLabel";
 
-var loadSvg = function (url) {
-  return fetch(url)
+const loadSvg = (url) =>
+  fetch(url)
     .then((response) => response.text())
     .then((raw) =>
       new window.DOMParser().parseFromString(raw, "image/svg+xml")
     );
-};
 
-var select = function (root, selector) {
-  return Array.prototype.slice.call(root.querySelectorAll(selector));
-};
+const select = (root, selector) =>
+  Array.prototype.slice.call(root.querySelectorAll(selector));
 
 const getDist = (a, b) => Math.sqrt(Math.abs((b.x - a.x) * (b.y - a.y)));
 
@@ -40,7 +38,7 @@ const getResizedUrl = async (src, ratio = 1) =>
     img.src = src;
   });
 
-function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
+function DataShaker({ dataName, sprite, code, toggleData }) {
   // const [boundBox, setBoundBox] = useState({})
   const [activeCity, setCity] = useState(null);
   const [modalPos, setModalPos] = useState({});
@@ -48,32 +46,32 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
   const ref = useRef();
   const eventFiretime = useRef();
   useEffect(() => {
-    const bodyPositions = {};
-    let dataCount;
     ref.current.innerHTML = null;
     const bb = ref.current.getBoundingClientRect();
     // setBoundBox(bb)
     const { width, height } = bb;
-    const spriteSize = 380;
+    let spriteSize = 512;
 
-    var Engine = Matter.Engine,
-      Render = Matter.Render,
-      Runner = Matter.Runner,
-      Events = Matter.Events,
-      Common = Matter.Common,
-      MouseConstraint = Matter.MouseConstraint,
-      Mouse = Matter.Mouse,
-      Composite = Matter.Composite,
-      Svg = Matter.Svg,
-      Body = Matter.Body,
-      Bodies = Matter.Bodies;
+    const {
+      Engine,
+      Render,
+      Runner,
+      Events,
+      Common,
+      MouseConstraint,
+      Mouse,
+      Composite,
+      Svg,
+      Body,
+      Bodies,
+    } = Matter;
 
     // create engine
-    var engine = Engine.create(),
-      world = engine.world;
+    const engine = Engine.create();
+    const world = engine.world;
 
     // create renderer
-    var render = Render.create({
+    const render = Render.create({
       element: ref.current,
       engine,
       options: {
@@ -88,7 +86,7 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
     Render.run(render);
 
     // create runner
-    var runner = Runner.create();
+    const runner = Runner.create();
     Runner.run(runner, engine);
 
     const barWidth = 20;
@@ -112,7 +110,7 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
       }),
     ]);
     const vmin = Math.min(width, height);
-    const maxSize = vmin / spriteSize / 3;
+
     Promise.all([
       loadSvg(`${process.env.PUBLIC_URL}/sprites/${sprite}`),
       loadSvg(`${process.env.PUBLIC_URL}/sprites/silo/${sprite}`),
@@ -123,7 +121,17 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
         +d["% Days"],
         d.Country,
       ]);
-      dataCount = rainData.length;
+      const svgEle = root.querySelector("svg");
+      if (!svgEle.hasAttribute("width")) {
+        const [, , w, h] = svgEle
+          .getAttribute("viewBox")
+          .split(" ")
+          .map(Number);
+        svgEle.setAttribute("width", w);
+        svgEle.setAttribute("height", h);
+      }
+      spriteSize = svgEle.getAttribute("width") * 1;
+      const maxSize = vmin / spriteSize * 0.3;
       const getValue = (d) => d[1];
       const scale = scaleSqrt()
         .domain([min(rainData, getValue), max(rainData, getValue)])
@@ -131,7 +139,6 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
       const vertexSets = select(silo, "path").map(function (path) {
         return Svg.pathToVertices(path);
       });
-      const svgEle = root.querySelector("svg");
       const dataPoints = await Promise.all(
         rainData.map(async (city) => {
           const s = scale(getValue(city));
@@ -172,21 +179,19 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
           )
         ) {
           Events.off(engine, "afterUpdate", checkAll);
-          setTimeout(() => {
-            setTheMode((m) => 1 - m);
-          }, 500)
+          setTimeout(toggleData, 500);
         }
-      }
+      };
       Events.on(engine, "afterUpdate", checkAll);
     });
 
     // add gyro control
     if (typeof window !== "undefined") {
-      var updateGravity = function (event) {
-        var orientation =
+      const updateGravity = function (event) {
+        const orientation =
             typeof window.orientation !== "undefined" ? window.orientation : 0,
           gravity = engine.gravity;
-        var factor = 10;
+        const factor = 10;
 
         if (orientation === 0) {
           gravity.x = Common.clamp(event.gamma, -90, 90) / factor;
@@ -207,16 +212,16 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
     }
 
     // add mouse control
-    var mouse = Mouse.create(render.canvas),
-      mouseConstraint = MouseConstraint.create(engine, {
-        mouse,
-        constraint: {
-          stiffness: 0.2,
-          render: {
-            visible: false,
-          },
+    const mouse = Mouse.create(render.canvas);
+    const mouseConstraint = MouseConstraint.create(engine, {
+      mouse,
+      constraint: {
+        stiffness: 0.2,
+        render: {
+          visible: false,
         },
-      });
+      },
+    });
 
     Composite.add(world, mouseConstraint);
 
@@ -228,6 +233,8 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
         eventFiretime.current = Date.now();
         setCity(e.body.label);
         setModalPos(e.mouse.position);
+      } else {
+        setCity(null);
       }
     });
 
@@ -237,7 +244,7 @@ function DataShaker({ dataName, sprite, code, theMode, setTheMode }) {
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
-  }, [dataName, sprite, theMode]);
+  }, [dataName, sprite]);
 
   return (
     <div className="shaker-wrapper">

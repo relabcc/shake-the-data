@@ -1,10 +1,23 @@
-<svg id="Layer_1" data-name="Layer 1"
-    xmlns="http://www.w3.org/2000/svg" width="380" height="338" viewBox="0 0 380 338">
-    <path d="M190.16,5.24h0A6.85,6.85,0,0,1,197,12.1l0,35.22H183.26l0-35.22A6.85,6.85,0,0,1,190.16,5.24Z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <path d="M164.65,332.76A34.72,34.72,0,0,1,130,298V289.4a9.47,9.47,0,0,1,18.94,0v8.64a15.75,15.75,0,1,0,31.5,0l.14-158.32a9.47,9.47,0,1,1,18.93,0l-.14,158.32A34.72,34.72,0,0,1,164.65,332.76Z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <line x1="180.45" y1="276.58" x2="199.38" y2="276.6" fill="none" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <path d="M190.14,24.53c-22.52,0-95,91.23-95,163.06,0,0-18.78-11.5-42.87-13s-47.47,6.51-47.47,6.51C4.81,143.65,50.22,24.41,190.14,24.53Z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <path d="M190.14,24.53,190,194.13a130.37,130.37,0,0,0-44.89-11.8c-25.22-1.78-50,5.26-50,5.26.06-71.83,72.5-163.08,95-163.06" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <path d="M190.14,24.53c22.5.87,94.79,91.4,94.73,163.23,0,0,18.8-11.47,42.89-13s47.46,6.59,47.46,6.59C375.25,144,327.22,29.81,190.14,24.53Z" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
-    <path d="M190.14,24.53,190,194.13a130.51,130.51,0,0,1,44.91-11.72c25.23-1.74,50,5.35,50,5.35.06-71.83-72.22-163.21-94.73-163.23" fill="#fff" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="5.66"/>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 25.4.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 455.4" style="enable-background:new 0 0 512 455.4;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;stroke:#000000;stroke-width:5.66;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#000000;stroke-width:5.66;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+<path class="st0" d="M256.2,7.1L256.2,7.1c5.1,0,9.2,4.1,9.2,9.2c0,0,0,0,0,0v47.4h-18.5V16.4C246.9,11.3,251,7.1,256.2,7.1
+	C256.2,7.1,256.2,7.1,256.2,7.1z"/>
+<path class="st0" d="M221.9,448.3c-25.8-0.1-46.7-21-46.7-46.8v-11.6c0-7,5.7-12.8,12.8-12.8c7,0,12.8,5.7,12.8,12.8v11.6
+	c0,11.7,9.5,21.2,21.2,21.2s21.2-9.5,21.2-21.2l0.2-213.3c-0.2-7,5.3-12.9,12.3-13.2c7-0.2,12.9,5.3,13.2,12.3c0,0.3,0,0.6,0,0.8
+	l-0.2,213.3C268.6,427.4,247.7,448.3,221.9,448.3L221.9,448.3z"/>
+<line class="st1" x1="243.1" y1="372.6" x2="268.6" y2="372.6"/>
+<path class="st0" d="M256.2,33.1c-30.3,0-128,122.9-128,219.6c0,0-25.3-15.5-57.7-17.5C38,233.2,6.5,244,6.5,244
+	C6.5,193.6,67.7,32.9,256.2,33.1z"/>
+<path class="st0" d="M256.2,33.1L256,261.6c-19-8.9-39.5-14.3-60.5-15.9c-34-2.4-67.3,7.1-67.3,7.1C128.3,156,225.8,33.1,256.2,33.1
+	"/>
+<path class="st0" d="M256.2,33.1c30.3,1.2,127.7,123.1,127.6,219.9c0,0,25.3-15.5,57.8-17.5s63.9,8.9,63.9,8.9
+	C505.5,194,440.8,40.2,256.2,33.1z"/>
+<path class="st0" d="M256.2,33.1L256,261.6c19.1-8.8,39.5-14.2,60.5-15.8c34-2.3,67.4,7.2,67.4,7.2
+	C383.9,156.2,286.6,33.1,256.2,33.1"/>
 </svg>

@@ -1,6 +1,9 @@
 body {
-    
     font-family: Arial, Helvetica, 'Noto Sans TC', sans-serif;
+}
+
+#svg-logo {
+    width: 100px;
 }
 
 .wrapper {
@@ -9,6 +12,7 @@ body {
     flex-direction: column;
     overflow: hidden;
     user-select: none;
+    transition: all 0.5s ease-in-out;
 }
 
 .wrapper.is-dark {
@@ -74,6 +78,7 @@ footer .eng {
     line-height: 1em;
     font-weight: 900;
     -webkit-text-stroke-width: 1px;
+    transition: all 0.5s ease-in-out;
 }
 
 .is-dark .proj-code {
@@ -114,6 +119,7 @@ footer .eng {
     position: relative;
     overflow: hidden;
     border: 2px solid ;
+    transition: all 0.5s ease-in-out;
 }
 
 .is-dark .shaker {
@@ -132,6 +138,7 @@ footer .eng {
 .label-box {
     padding: 1em;
     border: 1px solid;
+    transition: all 0.5s ease-in-out;
 }
 
 .is-dark .label-box {
