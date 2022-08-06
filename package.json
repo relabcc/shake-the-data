@@ -2,7 +2,6 @@
   "name": "shake-the-data",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://relabcc.github.io/shake-the-data",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.3.0",
@@ -21,8 +20,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "deploy": "gh-pages -d build -r https://github.com/relabcc/shake-the-data.git"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
