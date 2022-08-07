@@ -38,7 +38,7 @@ const getResizedUrl = async (src, ratio = 1) =>
     img.src = src;
   });
 
-function DataShaker({ dataName, sprite, code, toggleData }) {
+function DataShaker({ data, sprite, code, toggleData }) {
   // const [boundBox, setBoundBox] = useState({})
   const [activeCity, setCity] = useState(null);
   const [modalPos, setModalPos] = useState({});
@@ -115,12 +115,6 @@ function DataShaker({ dataName, sprite, code, toggleData }) {
       loadSvg(`${process.env.PUBLIC_URL}/sprites/${sprite}`),
       loadSvg(`${process.env.PUBLIC_URL}/sprites/silo/${sprite}`),
     ]).then(async ([root, silo]) => {
-      const data = await import(`./data/${dataName}`);
-      const rainData = data.default.map((d) => [
-        d.City,
-        +d["% Days"],
-        d.Country,
-      ]);
       const svgEle = root.querySelector("svg");
       if (!svgEle.hasAttribute("width")) {
         const [, , w, h] = svgEle
@@ -131,17 +125,17 @@ function DataShaker({ dataName, sprite, code, toggleData }) {
         svgEle.setAttribute("height", h);
       }
       spriteSize = svgEle.getAttribute("width") * 1;
-      const maxSize = vmin / spriteSize * 0.3;
-      const getValue = (d) => d[1];
+      const maxSize = vmin / spriteSize * 0.5;
+      const getValue = (d) => d.value;
       const scale = scaleSqrt()
-        .domain([min(rainData, getValue), max(rainData, getValue)])
+        .domain([min(data, getValue), max(data, getValue)])
         .range([maxSize * 0.5, maxSize]);
       const vertexSets = select(silo, "path").map(function (path) {
         return Svg.pathToVertices(path);
       });
       const dataPoints = await Promise.all(
-        rainData.map(async (city) => {
-          const s = scale(getValue(city));
+        data.map(async (d) => {
+          const s = scale(getValue(d));
           const texture = await getResizedUrl(
             `data:image/svg+xml,${encodeURIComponent(svgEle?.outerHTML)}`,
             s
@@ -160,7 +154,7 @@ function DataShaker({ dataName, sprite, code, toggleData }) {
             },
             true
           );
-          box.label = `${round(city[1] * 100, 2)}%\n${city[0]}, ${city[2]}`;
+          box.label = d.label
           Body.scale(box, s, s);
           Composite.add(world, box);
 
@@ -244,7 +238,7 @@ function DataShaker({ dataName, sprite, code, toggleData }) {
 
     // keep the mouse in sync with rendering
     render.mouse = mouse;
-  }, [dataName, sprite]);
+  }, [data, sprite]);
 
   return (
     <div className="shaker-wrapper">

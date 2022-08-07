@@ -1,0 +1,61 @@
+{
+    "title": "Rainy Days",
+    "zh": "全世界最常下雨的城市",
+    "en": "World Cities That Have The Most Rainy Days",
+    "sprite": "umbrella.svg",
+    "value": "% Days",
+    "label": "{% Days}[.2%]\n% of days\n{City}, {Country}",
+    "code": "001",
+    "data": [
+        {
+            "City": "Kuala Lumpur",
+            "Country": "Malaysia",
+            "% Days": "0.8296"
+        },
+        {
+            "City": "Fortaleza",
+            "Country": "Brazil",
+            "% Days": "0.8288"
+        },
+        {
+            "City": "Abidjan",
+            "Country": "Ivory Coast",
+            "% Days": "0.7488"
+        },
+        {
+            "City": "Guayaquil",
+            "Country": "Ecuador",
+            "% Days": "0.7471"
+        },
+        {
+            "City": "Recife",
+            "Country": "Brazil",
+            "% Days": "0.7373"
+        },
+        {
+            "City": "Lagos",
+            "Country": "Nigeria",
+            "% Days": "0.7252"
+        },
+        {
+            "City": "Port Harcourt",
+            "Country": "Nigeria",
+            "% Days": "0.7003"
+        },
+        {
+            "City": "Kumasi",
+            "Country": "Ghana",
+            "% Days": "0.6879"
+        },
+        {
+            "City": "Ibadan",
+            "Country": "Nigeria",
+            "% Days": "0.6816"
+        },
+        {
+            "City": "London",
+            "Country": "United Kingdom",
+            "% Days": "0.6693"
+        }
+    ]
+}

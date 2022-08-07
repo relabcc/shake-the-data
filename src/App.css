@@ -138,13 +138,13 @@ footer .eng {
 .label-box {
     padding: 1em;
     border: 1px solid;
-    transition: all 0.5s ease-in-out;
+    transition: background-color 0.5s ease-in-out, border-color 0.5s ease-in-out;
+    width: max-content;
 }
 
 .is-dark .label-box {
     background-color:  black;
     border-color: white;
-
 }
 
 .is-light .label-box {

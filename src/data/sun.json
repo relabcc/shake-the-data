@@ -1,0 +1,61 @@
+{
+    "title": "Sunny Days",
+    "zh": "全世界日照最多的城市",
+    "en": "World Cities That Have The Most Sunny Days",
+    "sprite": "sun.svg",
+    "value": "sunshine hours",
+    "label": "{sunshine hours}[,]\nhours / year\n{city}, {country}",
+    "code": "001",
+    "data": [
+        {
+          "country": "United States",
+          "city": "Yuma",
+          "sunshine hours": "4015"
+        },
+        {
+          "country": "Egypt",
+          "city": "Marsa Alam",
+          "sunshine hours": "3958"
+        },
+        {
+          "country": "Chile",
+          "city": "Calama",
+          "sunshine hours": "3926"
+        },
+        {
+          "country": "Sudan",
+          "city": "Khartoum",
+          "sunshine hours": "3737"
+        },
+        {
+          "country": "South Africa",
+          "city": "Upington",
+          "sunshine hours": "3732"
+        },
+        {
+          "country": "Algeria",
+          "city": "Tamanrasset",
+          "sunshine hours": "3686"
+        },
+        {
+          "country": "Madagascar",
+          "city": "Toliara",
+          "sunshine hours": "3610"
+        },
+        {
+          "country": "Kenya",
+          "city": "Lodwar",
+          "sunshine hours": "3582"
+        },
+        {
+          "country": "Egypt",
+          "city": "Alexandria",
+          "sunshine hours": "3580"
+        },
+        {
+          "country": "Botswana",
+          "city": "Ghanzi",
+          "sunshine hours": "3579"
+        }
+      ]
+}
