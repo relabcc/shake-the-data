@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useAsync } from 'react-use'
 import { format } from 'd3-format'
+import { useWindowSize } from 'react-use'
 
 import './App.css';
 import DataShaker from './DataShaker';
@@ -19,6 +20,7 @@ function App() {
   const [dataIndex, setDataIndex] = useState(0);
   const [mounted, setIsmounted] = useState(null)
   const [isPermitted, setIsPermitted] = useState()
+  const { width, height } = useWindowSize()
   const { value } = useAsync(async () => {
     const data = await import(`./data/${pair[dataIndex]}`);
     const parsedData = data.data.map((d) => ({
@@ -55,6 +57,7 @@ function App() {
           </header>
           <main className="flex-grow">
             <DataShaker
+              key={`${width}x${height}`}
               data={value.data}
               sprite={value.sprite}
               code="001"

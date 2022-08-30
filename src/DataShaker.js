@@ -4,7 +4,6 @@ import "pathseg";
 import { scaleSqrt } from "d3-scale";
 import { min, max } from "d3-array";
 import random from "lodash/random";
-import round from "lodash/round";
 import DataLabel from "./DataLabel";
 
 const loadSvg = (url) =>
@@ -125,7 +124,7 @@ function DataShaker({ data, sprite, code, toggleData }) {
         svgEle.setAttribute("height", h);
       }
       spriteSize = svgEle.getAttribute("width") * 1;
-      const maxSize = vmin / spriteSize * 0.5;
+      const maxSize = vmin / spriteSize * 0.4;
       const getValue = (d) => d.value;
       const scale = scaleSqrt()
         .domain([min(data, getValue), max(data, getValue)])
